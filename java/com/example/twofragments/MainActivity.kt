@@ -39,12 +39,12 @@ class MainActivity : AppCompatActivity() , FragmentActivityCallBack {
             if(savedInstanceState == null) {
                 addFragment()
             }
-            if(savedInstanceState?.getString("key_text") != null){
-                addFragmentDetails(Bundle().apply {
-                    countryName = savedInstanceState.getString("key_text")
-                    putString("key_text",countryName )
-                })
-            }
+//            if(savedInstanceState?.getString("key_text") != null){
+//                addFragmentDetails(Bundle().apply {
+//                    countryName = savedInstanceState.getString("key_text")
+//                    putString("key_text",countryName )
+//                })
+//            }
         }
         if(findViewById<ConstraintLayout>(R.id.landscape) != null) {
             addFragment()
@@ -52,12 +52,13 @@ class MainActivity : AppCompatActivity() , FragmentActivityCallBack {
                 addFragmentDetails(Bundle().apply {
                     putString("key_text","India")
                 })
-            }else{
-                addFragmentDetails(Bundle().apply {
-                    countryName = savedInstanceState.getString("key_text")
-                    putString("key_text",savedInstanceState.getString("key_text","India"))
-                })
             }
+//            else{
+//                addFragmentDetails(Bundle().apply {
+//                    countryName = savedInstanceState.getString("key_text")
+//                    putString("key_text",savedInstanceState.getString("key_text","India"))
+//                })
+//            }
 
         }
 
@@ -65,6 +66,7 @@ class MainActivity : AppCompatActivity() , FragmentActivityCallBack {
         onBackPressedDispatcher.addCallback(this) {
             if(fragmentManger.backStackEntryCount > 0){
                 if(findViewById<ConstraintLayout>(R.id.portrait) != null){
+                    countryName = null
                     fragmentManger.popBackStack("second",FragmentManager.POP_BACK_STACK_INCLUSIVE)
                 }else {
                     finish()
