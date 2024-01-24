@@ -1,5 +1,6 @@
 package com.example.twofragments
 
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() , FragmentActivityCallBack {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.i("TAG","onCreate")
         setContentView(R.layout.activity_main)
         if(findViewById<ConstraintLayout>(R.id.portrait) != null) {
             if(savedInstanceState == null) {
@@ -119,6 +121,37 @@ class MainActivity : AppCompatActivity() , FragmentActivityCallBack {
         this.countryName = bundle.getString("key_text")
         Log.i("TAG","countryName $countryName ")
         addFragmentDetails(bundle)
+    }
+
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        setContentView(R.layout.activity_main)
+        super.onConfigurationChanged(newConfig)
+        Log.i("TAG","onConfigurationChanges")
+        if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE){
+            addFragment()
+            Log.i("TAG", "lan    $countryName")
+            if(countryName != null ){
+                addFragmentDetails(Bundle().apply {
+                    putString("key_text",countryName)
+                })
+            }else{
+                addFragmentDetails(Bundle().apply {
+                    putString("key_text","India")
+                })
+            }
+        }
+
+        if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+            if(countryName == null){
+                addFragment()
+            }else{
+                addFragmentDetails(Bundle().apply {
+                    putString("key_text",countryName)
+                })
+            }
+        }
+
     }
 }
 
