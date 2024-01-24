@@ -27,10 +27,6 @@ class CountriesFragment : Fragment(R.layout.fragment_countires){
         val cAdapter = CustomArrayAdapter(numbers)
         listView.adapter = cAdapter
         listView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT)
-        listView.setOnItemClickListener { parent, view, position, id ->
-            val bundle = Bundle()
-            bundle.putString("KEY",(view as TextView).text.toString())
-        }
         val layout = LinearLayout(requireContext()).apply {
             addView(listView)
         }
