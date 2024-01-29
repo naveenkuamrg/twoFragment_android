@@ -22,7 +22,6 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlin.math.log
 
 class MainActivity : AppCompatActivity() , FragmentActivityCallBack {
-
     val fragmentManger = supportFragmentManager
     var countryName : String? =  null
     val map = mutableMapOf<String,String>().apply {
@@ -62,14 +61,20 @@ class MainActivity : AppCompatActivity() , FragmentActivityCallBack {
 
         }
 
-
+//
         onBackPressedDispatcher.addCallback(this) {
+            Log.i("BackStack","message")
             if(fragmentManger.backStackEntryCount > 0){
                 if(findViewById<ConstraintLayout>(R.id.portrait) != null){
                     countryName = null
+//                    fragmentManger.popBackStack()
                     fragmentManger.popBackStack("second",FragmentManager.POP_BACK_STACK_INCLUSIVE)
                 }else {
-                    finish()
+                    if(fragmentManger.backStackEntryCount == 1){
+                        finish()
+                    }else {
+                        fragmentManger.popBackStack()
+                    }
                 }
             }else{
                 finish()
@@ -101,10 +106,10 @@ class MainActivity : AppCompatActivity() , FragmentActivityCallBack {
                     arguments = bundle
                 })
         }
+        fragmentTransaction.setReorderingAllowed(true)
         fragmentTransaction.addToBackStack("second")
         fragmentTransaction.commit()
     }
-
 
 
 

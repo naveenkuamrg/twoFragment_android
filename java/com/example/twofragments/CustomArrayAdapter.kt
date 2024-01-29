@@ -24,6 +24,7 @@ class CustomArrayAdapter(val numbers : List<String>) : BaseAdapter() {
         Log.i("SoutId",getItemId(position).toString())
         return TextView(parent.context).apply {
             text = getItem(position)
+            id = R.id.textView
         }
     }
 
